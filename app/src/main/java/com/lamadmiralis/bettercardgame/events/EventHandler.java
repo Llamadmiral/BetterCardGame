@@ -2,7 +2,10 @@ package com.lamadmiralis.bettercardgame.events;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,8 +15,8 @@ import java.util.TreeSet;
 public class EventHandler {
 
     private static final String TAG = "EventHandler";
-    private static final Set<AbstractEvent> EVENTS = new TreeSet<>(new EventComparator());
-    private static final Set<AbstractEvent> EVENTS_TO_FIRE = new TreeSet<>(new EventComparator());
+    private static final List<AbstractEvent> EVENTS = new ArrayList<>();
+    private static final List<AbstractEvent> EVENTS_TO_FIRE = new ArrayList<>();
 
     private EventHandler() {
     }
@@ -25,12 +28,13 @@ public class EventHandler {
 
     public static void dispatch() {
         Log.e("EventHandler", "Dispatch called, size: " + EVENTS.size());
+        Collections.sort(EVENTS, new EventComparator());
         EVENTS_TO_FIRE.addAll(EVENTS);
         EVENTS.clear();
     }
 
-    public static Set<AbstractEvent> getFireableEvents() {
-        final Set<AbstractEvent> events = new TreeSet<>(new EventComparator());
+    public static List<AbstractEvent> getFireableEvents() {
+        final List<AbstractEvent> events = new ArrayList<>();
         if (!EVENTS_TO_FIRE.isEmpty()) {
             for (final AbstractEvent abstractEvent : EVENTS_TO_FIRE) {
                 if (abstractEvent.isFireable()) {
@@ -46,7 +50,7 @@ public class EventHandler {
 
         @Override
         public int compare(final AbstractEvent o1, final AbstractEvent o2) {
-            return o1.getOffset().compareTo(o2.getOffset());
+            return o2.getOffset().compareTo(o1.getOffset());
         }
 
         @Override
