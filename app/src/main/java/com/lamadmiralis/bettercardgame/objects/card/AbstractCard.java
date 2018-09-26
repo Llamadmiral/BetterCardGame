@@ -2,10 +2,13 @@ package com.lamadmiralis.bettercardgame.objects.card;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
 import com.lamadmiralis.bettercardgame.animation.impl.MovementCardAttack;
 import com.lamadmiralis.bettercardgame.animation.impl.MovementPlayCard;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
+import com.lamadmiralis.bettercardgame.events.InstantEvent;
 import com.lamadmiralis.bettercardgame.events.impl.EventAttackOnField;
+import com.lamadmiralis.bettercardgame.events.impl.EventCardDeath;
 import com.lamadmiralis.bettercardgame.events.impl.EventMovementEvent;
 import com.lamadmiralis.bettercardgame.objects.AbstractObject;
 import com.lamadmiralis.bettercardgame.utility.BattleContext;
@@ -25,6 +28,13 @@ public class AbstractCard extends AbstractObject {
     private Integer attackDamage = 0;
     private Integer healthPoints = 0;
     private boolean canAttack = true;
+    private boolean alreadyPlayed = false;
+    private float previousX;
+    private float previousY;
+    private int previousPosInHand = -1;
+    private int currentPosInHand;
+    private int currentPosInField;
+    private int previousPosInField = -1;
 
     public AbstractCard(final String name) {
         super();
@@ -35,9 +45,46 @@ public class AbstractCard extends AbstractObject {
 
     @Override
     public void click() {
-        this.setMovement(new MovementPlayCard(this));
-        BattleContext.getInstance().activateCard(this);
-        inHand = !inHand;
+        if (!alreadyPlayed) {
+            this.setMovement(new MovementPlayCard(this));
+            BattleContext.getInstance().activateCard(this);
+            if (inHand) {
+                previousPosInHand = currentPosInHand;
+            }
+            inHand = !inHand;
+        }
+    }
+
+    public int getPreviousPosInHand() {
+        return previousPosInHand;
+    }
+
+    public void setPreviousPosInHand(final int previousPosInHand) {
+        this.previousPosInHand = previousPosInHand;
+    }
+
+    public int getCurrentPosInHand() {
+        return currentPosInHand;
+    }
+
+    public void setCurrentPosInHand(final int currentPosInHand) {
+        this.currentPosInHand = currentPosInHand;
+    }
+
+    public int getCurrentPosInField() {
+        return currentPosInField;
+    }
+
+    public void setCurrentPosInField(final int currentPosInField) {
+        this.currentPosInField = currentPosInField;
+    }
+
+    public int getPreviousPosInField() {
+        return previousPosInField;
+    }
+
+    public void setPreviousPosInField(final int previousPosInField) {
+        this.previousPosInField = previousPosInField;
     }
 
     public Bitmap getCurrentImage() {
@@ -71,6 +118,30 @@ public class AbstractCard extends AbstractObject {
         }
     }
 
+    public void saveCurrentCoordinates() {
+        setPreviousX(getX());
+        setPreviousY(getY());
+    }
+
+    public float[] getPreviousCoordinates() {
+        return new float[]{getPreviousX(), getPreviousY()};
+    }
+
+    public float getPreviousX() {
+        return previousX;
+    }
+
+    public void setPreviousX(final float previousX) {
+        this.previousX = previousX;
+    }
+
+    public float getPreviousY() {
+        return previousY;
+    }
+
+    public void setPreviousY(final float previousY) {
+        this.previousY = previousY;
+    }
 
     public boolean isInHand() {
         return inHand;
@@ -106,6 +177,9 @@ public class AbstractCard extends AbstractObject {
 
     public void subtractFromHealth(final int healthPoints) {
         this.healthPoints -= healthPoints;
+        if (this.healthPoints <= 0) {
+            new InstantEvent<>(new EventCardDeath(this)).fire();
+        }
     }
 
     public Integer getInitialAttackDamage() {
@@ -128,9 +202,16 @@ public class AbstractCard extends AbstractObject {
         if (this.canAttack()) {
             final EventAttackOnField attackOnBattlefield = new EventAttackOnField(480);
             attackOnBattlefield.setAttacker(this);
-            EventHandler.addEvent(attackOnBattlefield);
-            EventHandler.addEvent(new EventMovementEvent(position * 500, this, new MovementCardAttack(this)));
+            EventHandler.addEvent(new EventMovementEvent(position * 500, this, new MovementCardAttack(this, attackOnBattlefield)));
         }
+    }
+
+    public boolean isAlreadyPlayed() {
+        return alreadyPlayed;
+    }
+
+    public void setAlreadyPlayed(final boolean alreadyPlayed) {
+        this.alreadyPlayed = alreadyPlayed;
     }
 
     private boolean canAttack() {

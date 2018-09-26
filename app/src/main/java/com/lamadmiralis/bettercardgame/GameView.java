@@ -2,15 +2,18 @@ package com.lamadmiralis.bettercardgame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+
 import com.lamadmiralis.bettercardgame.objects.card.CardTemplate;
 import com.lamadmiralis.bettercardgame.renderer.Clickable;
 import com.lamadmiralis.bettercardgame.renderer.Renderable;
 import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 import com.lamadmiralis.bettercardgame.utility.ResourceInitializer;
+import com.lamadmiralis.bettercardgame.utility.Tag;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -91,9 +94,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        InterfaceContext.getInstance().update();
-        for (final Renderable renderable : InterfaceContext.getInstance().getObjectsToDraw()) {
-            renderable.update();
+        try {
+            InterfaceContext.getInstance().update();
+            for (final Renderable renderable : InterfaceContext.getInstance().getObjectsToDraw()) {
+                renderable.update();
+            }
+        } catch (final Exception e) {
+            Log.e(Tag.MT, Tag.getFormattedExceptionMessage(e));
         }
     }
 

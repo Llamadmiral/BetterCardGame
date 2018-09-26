@@ -2,6 +2,8 @@ package com.lamadmiralis.bettercardgame.events;
 
 import android.util.Log;
 
+import com.lamadmiralis.bettercardgame.utility.Tag;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,7 +16,6 @@ import java.util.TreeSet;
  */
 public class EventHandler {
 
-    private static final String TAG = "EventHandler";
     private static final List<AbstractEvent> EVENTS = new ArrayList<>();
     private static final List<AbstractEvent> EVENTS_TO_FIRE = new ArrayList<>();
 
@@ -22,12 +23,12 @@ public class EventHandler {
     }
 
     public static void addEvent(final AbstractEvent event) {
-        Log.e(TAG, "Event added: " + event.getClass().getSimpleName());
+        Log.d(Tag.MT, "Event added: " + event.getClass().getSimpleName());
         EVENTS.add(event);
     }
 
     public static void dispatch() {
-        Log.e("EventHandler", "Dispatch called, size: " + EVENTS.size());
+        Log.d(Tag.MT, "Dispatch called, size: " + EVENTS.size());
         Collections.sort(EVENTS, new EventComparator());
         EVENTS_TO_FIRE.addAll(EVENTS);
         EVENTS.clear();

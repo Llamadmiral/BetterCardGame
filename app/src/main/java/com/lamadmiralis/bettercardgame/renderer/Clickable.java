@@ -9,8 +9,6 @@ public abstract class Clickable implements Renderable {
 
     private float x;
     private float y;
-    private float previousX;
-    private float previousY;
     private boolean isClickable = true;
     private boolean inAnimation = false;
 
@@ -23,31 +21,6 @@ public abstract class Clickable implements Renderable {
             isClicked = true;
         }
         return isClicked;
-    }
-
-    public void saveCurrentCoordinates() {
-        setPreviousX(getX());
-        setPreviousY(getY());
-    }
-
-    public float[] getPreviousCoordinates() {
-        return new float[]{getPreviousX(), getPreviousY()};
-    }
-
-    public float getPreviousX() {
-        return previousX;
-    }
-
-    public void setPreviousX(final float previousX) {
-        this.previousX = previousX;
-    }
-
-    public float getPreviousY() {
-        return previousY;
-    }
-
-    public void setPreviousY(final float previousY) {
-        this.previousY = previousY;
     }
 
     public boolean isInAnimation() {

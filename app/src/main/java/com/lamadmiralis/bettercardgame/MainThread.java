@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import com.lamadmiralis.bettercardgame.utility.Tag;
+
 /**
  * @author maczaka
  */
@@ -53,12 +55,13 @@ public class MainThread extends Thread {
                 this.gameView.draw(canvas);
             }
         } catch (final Exception e) {
+            Log.e(Tag.MT, Tag.getFormattedExceptionMessage(e));
         } finally {
             if (canvas != null) {
                 try {
                     surfaceHolder.unlockCanvasAndPost(canvas);
                 } catch (final Exception e) {
-                    e.printStackTrace();
+                    Log.e(Tag.MT, Tag.getFormattedExceptionMessage(e));
                 }
             }
         }
@@ -75,7 +78,7 @@ public class MainThread extends Thread {
                 sleep(5);
             }
         } catch (final InterruptedException e) {
-            Log.e("MainThread", "InterruptedException");
+            Log.e(Tag.MT, "InterruptedException");
         }
     }
 

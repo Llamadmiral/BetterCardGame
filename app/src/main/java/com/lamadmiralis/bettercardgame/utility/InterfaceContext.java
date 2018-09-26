@@ -2,6 +2,8 @@ package com.lamadmiralis.bettercardgame.utility;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
+
 import com.lamadmiralis.bettercardgame.events.AbstractEvent;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.events.impl.EventDrawCard;
@@ -21,7 +23,6 @@ public class InterfaceContext {
 
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-    private static final String TAG = "InterfaceContext";
     private static InterfaceContext instance;
     private Context context;
 
@@ -72,8 +73,12 @@ public class InterfaceContext {
     }
 
     public void update() {
-        for (final AbstractEvent abstractEvent : EventHandler.getFireableEvents()) {
-            abstractEvent.fire();
+        try {
+            for (final AbstractEvent abstractEvent : EventHandler.getFireableEvents()) {
+                abstractEvent.fire();
+            }
+        } catch (final Exception e) {
+            Log.e(Tag.MT, Tag.getFormattedExceptionMessage(e));
         }
     }
 

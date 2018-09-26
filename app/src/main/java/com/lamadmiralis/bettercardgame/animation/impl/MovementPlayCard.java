@@ -1,6 +1,7 @@
 package com.lamadmiralis.bettercardgame.animation.impl;
 
 import com.lamadmiralis.bettercardgame.animation.Movement;
+import com.lamadmiralis.bettercardgame.animation.MovementHelper;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import com.lamadmiralis.bettercardgame.utility.BattleContext;
 
@@ -26,7 +27,7 @@ public class MovementPlayCard extends Movement {
         } else {
             finalPosition = card.getPreviousCoordinates();
         }
-        stepList.add(addStepBetweenTwoPoints(new float[]{card.getX(), card.getY()},
+        stepList.add(MovementHelper.addStepBetweenTwoPoints(new float[]{card.getX(), card.getY()},
                 finalPosition,
                 5));
     }
