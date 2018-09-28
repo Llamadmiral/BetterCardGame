@@ -1,15 +1,13 @@
 package com.lamadmiralis.bettercardgame.utility;
 
-import com.lamadmiralis.bettercardgame.animation.impl.MovementPlayCard;
 import com.lamadmiralis.bettercardgame.animation.impl.MovementReArrange;
 import com.lamadmiralis.bettercardgame.events.InstantEvent;
 import com.lamadmiralis.bettercardgame.events.impl.EventMovementEvent;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
 import java.util.Map;
-import java.util.TreeMap;
 
-public class Hand extends AbstractCardHolder{
+public class Hand extends AbstractCardHolder {
 
     private Contestant owner;
     /**
@@ -50,15 +48,15 @@ public class Hand extends AbstractCardHolder{
         } else {
             final int newPosition = cards.size();
             cards.put(newPosition, card);
-            card.setCurrentPosInHand(newPosition);
         }
     }
 
 
     @Override
     public void removeCard(final AbstractCard card) {
-        card.setPreviousPosInHand(card.getCurrentPosInHand());
-        cards.remove(card.getCurrentPosInHand());
+        final int positionOfCard = this.getPositionOfCard(card);
+        card.setPreviousPosInHand(positionOfCard);
+        cards.remove(positionOfCard);
     }
 
     public void reset() {

@@ -31,9 +31,6 @@ public class AbstractCard extends AbstractObject {
     private float previousX;
     private float previousY;
     private int previousPosInHand = -1;
-    private int currentPosInHand;
-    private int currentPosInField;
-    private int previousPosInField = -1;
 
     public AbstractCard(final String name) {
         super();
@@ -46,9 +43,6 @@ public class AbstractCard extends AbstractObject {
     public void click() {
         if (!alreadyPlayed) {
             BattleContext.getInstance().activateCard(this);
-            if (inHand) {
-                previousPosInHand = currentPosInHand;
-            }
             inHand = !inHand;
         }
     }
@@ -59,14 +53,6 @@ public class AbstractCard extends AbstractObject {
 
     public void setPreviousPosInHand(final int previousPosInHand) {
         this.previousPosInHand = previousPosInHand;
-    }
-
-    public int getCurrentPosInHand() {
-        return currentPosInHand;
-    }
-
-    public void setCurrentPosInHand(final int currentPosInHand) {
-        this.currentPosInHand = currentPosInHand;
     }
 
     public Bitmap getCurrentImage() {

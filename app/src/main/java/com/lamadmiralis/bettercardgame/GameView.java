@@ -15,6 +15,7 @@ import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 import com.lamadmiralis.bettercardgame.utility.ResourceInitializer;
 import com.lamadmiralis.bettercardgame.utility.Tag;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -115,7 +116,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 return o1.getZIndex() - o2.getZIndex();
             }
         });
-        for (final Renderable renderable : objectsToDraw) {
+        for (final Renderable renderable : new ArrayList<>(objectsToDraw)) {
             renderable.render(canvas);
         }
     }
