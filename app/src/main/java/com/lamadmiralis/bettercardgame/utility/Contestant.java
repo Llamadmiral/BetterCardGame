@@ -1,5 +1,6 @@
 package com.lamadmiralis.bettercardgame.utility;
 
+import com.lamadmiralis.bettercardgame.animation.impl.MovementPlayCard;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
@@ -42,6 +43,7 @@ public class Contestant {
     }
 
     void activateCard(final AbstractCard card) {
+        card.setMovement(new MovementPlayCard(card));
         if (card.isInHand()) {
             hand.removeCard(card);
             hand.incPlayedCards();
@@ -53,12 +55,21 @@ public class Contestant {
     }
 
     public float[] getNextPositionForDrawnCard() {
-        return getCoordinatesOfNthCardInHand(hand.getCards().size());
+        final int pos = hand.getFirstEmptySpace();
+        //Log.i(Tag.MT, "getNextPositionForDrawnCard: " + pos);
+        return getCoordinatesOfNthCardInHand(pos);
     }
 
     public float[] getNextPositionForPlayedCard() {
-        int x = ((SMALL_CARD_WIDTH + PADDING) * field.getCards().size()) + BASE_OFFSET;
-        float y = isPlayer ? PLAYER_HAND_HEIGHT - (SMALL_CARD_HEIGHT * 1.4F) : ENEMY_HAND_HEIGHT + (SMALL_CARD_HEIGHT * 1.4F);
+        final int pos = field.getFirstEmptySpace();
+        return getCoordinatesOfNthCardInField(pos);
+    }
+
+    public float[] getCoordinatesOfNthCardInField(final int index) {
+        int x = ((SMALL_CARD_WIDTH + PADDING) * index) + BASE_OFFSET;
+        float y = isPlayer
+                ? PLAYER_HAND_HEIGHT - (SMALL_CARD_HEIGHT * 1.4F)
+                : ENEMY_HAND_HEIGHT + (SMALL_CARD_HEIGHT * 1.4F);
         return new float[]{x, y};
     }
 

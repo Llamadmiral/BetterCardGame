@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.lamadmiralis.bettercardgame.animation.impl.MovementCardAttack;
-import com.lamadmiralis.bettercardgame.animation.impl.MovementPlayCard;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.events.InstantEvent;
 import com.lamadmiralis.bettercardgame.events.impl.EventAttackOnField;
@@ -46,7 +45,6 @@ public class AbstractCard extends AbstractObject {
     @Override
     public void click() {
         if (!alreadyPlayed) {
-            this.setMovement(new MovementPlayCard(this));
             BattleContext.getInstance().activateCard(this);
             if (inHand) {
                 previousPosInHand = currentPosInHand;
@@ -69,22 +67,6 @@ public class AbstractCard extends AbstractObject {
 
     public void setCurrentPosInHand(final int currentPosInHand) {
         this.currentPosInHand = currentPosInHand;
-    }
-
-    public int getCurrentPosInField() {
-        return currentPosInField;
-    }
-
-    public void setCurrentPosInField(final int currentPosInField) {
-        this.currentPosInField = currentPosInField;
-    }
-
-    public int getPreviousPosInField() {
-        return previousPosInField;
-    }
-
-    public void setPreviousPosInField(final int previousPosInField) {
-        this.previousPosInField = previousPosInField;
     }
 
     public Bitmap getCurrentImage() {

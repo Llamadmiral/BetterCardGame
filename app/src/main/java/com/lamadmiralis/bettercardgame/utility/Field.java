@@ -5,13 +5,11 @@ import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-class Field {
+class Field extends AbstractCardHolder {
 
     private final Contestant owner;
     private int removedCards = 0;
-    private Map<Integer, AbstractCard> field = new TreeMap<>();
 
     public Field(final Contestant contestant) {
         this.owner = contestant;
@@ -19,7 +17,7 @@ class Field {
 
     public void finalizeTurn() {
         final List<Integer> cardsToRemove = new ArrayList<>();
-        for (final Map.Entry<Integer, AbstractCard> entry : field.entrySet()) {
+        for (final Map.Entry<Integer, AbstractCard> entry : this.cards.entrySet()) {
             final AbstractCard card = entry.getValue();
             card.setAlreadyPlayed(true);
             card.activateSpecialEffect();
@@ -29,47 +27,34 @@ class Field {
             }
         }
         for (final Integer index : cardsToRemove) {
-            field.remove(index);
+            this.cards.remove(index);
             removedCards++;
         }
         if (removedCards > 0) {
-            Contestant.collapseMap(field, field.keySet());
+            Contestant.collapseMap(this.cards, this.cards.keySet());
             removedCards = 0;
         }
     }
 
-    public Map<Integer, AbstractCard> getCards() {
-        return field;
-    }
-
     public void addCard(final AbstractCard card) {
-        if (card.getPreviousPosInField() != -1) {
-            field.put(card.getPreviousPosInField(), card);
-        } else {
-            field.put(field.size() + 1, card);
-            card.setPreviousPosInField(field.size() + 1);
-        }
-
+        final int pos = this.getFirstEmptySpace();
+        this.cards.put(pos, card);
     }
 
 
     public void removeCard(final AbstractCard card) {
-        field.remove(card.getCurrentPosInHand());
-    }
-
-    public int getPositionOfCard(final AbstractCard card) {
-        int pos = -1;
-        for (final Map.Entry<Integer, AbstractCard> entry : field.entrySet()) {
+        int indexToRemove = -1;
+        for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
             if (entry.getValue().getId() == card.getId()) {
-                pos = entry.getKey();
+                indexToRemove = entry.getKey();
                 break;
             }
         }
-        return pos;
+        this.cards.remove(indexToRemove);
     }
 
     public void reset() {
-        field.clear();
+        this.cards.clear();
         removedCards = 0;
     }
 }
