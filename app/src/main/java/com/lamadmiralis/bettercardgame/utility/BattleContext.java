@@ -14,10 +14,9 @@ public class BattleContext {
     public static final int ENEMY_HAND_HEIGHT = 60;
     static final int SMALL_CARD_WIDTH = ImageHolder.getResizedCardBack().getWidth();
     static final int SMALL_CARD_HEIGHT = ImageHolder.getResizedCardBack().getHeight();
-    public static final float PLAYER_HAND_HEIGHT = InterfaceContext.HEIGHT - ((SMALL_CARD_HEIGHT + 50));
+    public static final float PLAYER_HAND_HEIGHT = InterfaceContext.HEIGHT - (SMALL_CARD_HEIGHT + 50);
     static final int BASE_OFFSET = 30;
     static final int PADDING = 15;
-    private static final int CARD_WIDTH = ImageHolder.getResById(R.drawable.img_placeholder).getWidth();
     private static BattleContext instance = null;
 
     private Contestant player = new Contestant(true);

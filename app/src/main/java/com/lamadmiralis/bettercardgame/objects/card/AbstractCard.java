@@ -55,6 +55,7 @@ public class AbstractCard extends AbstractObject {
         this.previousPosInHand = previousPosInHand;
     }
 
+    @Override
     public Bitmap getCurrentImage() {
         Bitmap bitmap;
         if (inHand) {

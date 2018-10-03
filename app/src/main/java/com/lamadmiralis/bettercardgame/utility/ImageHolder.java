@@ -26,10 +26,14 @@ public class ImageHolder {
     private static final Map<String, Bitmap> CARD_CACHE = new HashMap<>();
     private static final SparseArray<Bitmap> RES_CACHE = new SparseArray<>();
     private static final SparseArray<Paint> NUMBER_CACHE = new SparseArray<>();
-    private static final float RESIZE_RATIO = 720 / 140;
+    private static final float RESIZE_RATIO = 720f / 140f;
     private static final float RESIZE_RATIO_FINAL = 4.5F;
     private static Paint font = new Paint();
     private static boolean fontInitiated = false;
+
+    private ImageHolder(){
+        //nope.
+    }
 
     public static Bitmap initResource(final Context context, final int id) {
         final Resources resources = context.getResources();
@@ -39,10 +43,10 @@ public class ImageHolder {
     }
 
     public static Bitmap resizeBitmap(final Bitmap originalBitmap, final float resizeRatio) {
-        return resizeBitMap(originalBitmap, resizeRatio, resizeRatio);
+        return resizeBitmap(originalBitmap, resizeRatio, resizeRatio);
     }
 
-    public static Bitmap resizeBitMap(final Bitmap original, final float ratioW, final float ratioH) {
+    public static Bitmap resizeBitmap(final Bitmap original, final float ratioW, final float ratioH) {
         return Bitmap.createScaledBitmap(original,
                 (int) (original.getWidth() / ratioW),
                 (int) (original.getHeight() / ratioH),

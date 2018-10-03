@@ -14,10 +14,10 @@ public abstract class Clickable implements Renderable {
 
     public boolean isClicked(final float clickX, final float clickY) {
         boolean isClicked = false;
-        final int x = (int) getX();
-        final int y = (int) getY();
+        final int coordX = (int) getX();
+        final int coordY = (int) getY();
         final Bitmap image = getCurrentImage();
-        if (x < clickX && clickX < x + image.getWidth() && y < clickY && clickY < y + image.getHeight()) {
+        if (coordX < clickX && clickX < coordX + image.getWidth() && coordY < clickY && clickY < coordY + image.getHeight()) {
             isClicked = true;
         }
         return isClicked;

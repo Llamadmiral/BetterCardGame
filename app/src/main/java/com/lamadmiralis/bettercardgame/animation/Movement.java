@@ -26,7 +26,7 @@ public abstract class Movement {
         if (step.finished()) {
             stepList.remove(0);
         }
-        return step.getStep();
+        return step.getSteps();
     }
 
     public boolean hasNext() {

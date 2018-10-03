@@ -53,9 +53,9 @@ public abstract class AbstractObject extends Clickable {
     @Override
     public void update() {
         if (isInAnimation()) {
-            final Movement movement = getMovement();
-            if (movement.hasNext()) {
-                movement.move(this);
+            final Movement mvmnt = getMovement();
+            if (mvmnt.hasNext()) {
+                mvmnt.move(this);
             } else {
                 setInAnimation(false);
                 setClickable(true);

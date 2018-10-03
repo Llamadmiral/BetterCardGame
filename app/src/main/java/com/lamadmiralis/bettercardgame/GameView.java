@@ -41,15 +41,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(final View v, final MotionEvent event) {
                 final int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_UP:
-                        final Clickable clickable = findClickedObject(event.getX(), event.getY());
-                        if (clickable != null) {
-                            clickable.click();
-                        }
-                        break;
-                    default:
-                        break;
+                if (action == MotionEvent.ACTION_UP) {
+                    final Clickable clickable = findClickedObject(event.getX(), event.getY());
+                    if (clickable != null) {
+                        clickable.click();
+                    }
+
                 }
                 return true;
             }
@@ -66,7 +63,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(final SurfaceHolder holder, final int format, final int width, final int height) {
-
+        //do nothing.
     }
 
     @Override
@@ -77,7 +74,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 mainThread.setRunning(false);
                 mainThread.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Log.e(Tag.MT, Tag.getFormattedExceptionMessage(e));
             }
             retry = false;
         }

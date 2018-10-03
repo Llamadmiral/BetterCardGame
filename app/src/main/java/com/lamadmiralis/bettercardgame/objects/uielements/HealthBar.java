@@ -79,7 +79,7 @@ public class HealthBar extends AbstractObject {
         //Draw the text
         canvas.drawText(this.getText(),
                 ProjectConstants.HEALTH_BAR_WIDTH / 2,
-                (ProjectConstants.HEALT_BAR_HEIGHT / 2) * 1.4f, TEXT_PAINT);
+                ((float) ProjectConstants.HEALT_BAR_HEIGHT / 2) * 1.4f, TEXT_PAINT);
         //Draw the round edge
         canvas.drawRoundRect(RECT_F, CORNER_RADIUS, CORNER_RADIUS, STROKE_PAINT);
         this.fullImage = bitmap;

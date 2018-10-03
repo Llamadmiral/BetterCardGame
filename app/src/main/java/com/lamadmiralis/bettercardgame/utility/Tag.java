@@ -1,7 +1,12 @@
 package com.lamadmiralis.bettercardgame.utility;
 
 public class Tag {
+
     public static final String MT = "CardGame";
+
+    private Tag() {
+        //nope.
+    }
 
     public static String getFormattedExceptionMessage(final Exception exception) {
         final StringBuilder builder = new StringBuilder(exception.toString());

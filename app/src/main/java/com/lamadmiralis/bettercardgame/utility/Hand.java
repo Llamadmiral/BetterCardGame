@@ -24,7 +24,7 @@ public class Hand extends AbstractCardHolder {
         if (playedCards > 0) {
             collapseMap(cards, cards.keySet());
             for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
-                final float nextPosition[] = owner.getCoordinatesOfNthCardInHand(entry.getKey());
+                final float[] nextPosition = owner.getCoordinatesOfNthCardInHand(entry.getKey());
                 new InstantEvent<>(new EventMovementEvent(0, entry.getValue(), new MovementReArrange(entry.getValue(), nextPosition))).fire();
             }
             playedCards = 0;

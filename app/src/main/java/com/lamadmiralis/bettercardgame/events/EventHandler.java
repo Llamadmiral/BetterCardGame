@@ -51,11 +51,6 @@ public class EventHandler {
         public int compare(final AbstractEvent o1, final AbstractEvent o2) {
             return o2.getOffset().compareTo(o1.getOffset());
         }
-
-        @Override
-        public boolean equals(final Object obj) {
-            return obj instanceof EventComparator;
-        }
     }
 
 }

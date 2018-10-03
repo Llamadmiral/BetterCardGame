@@ -18,7 +18,7 @@ public class EventStep extends Step {
     }
 
     @Override
-    public float[] getStep() {
+    public float[] getSteps() {
         new InstantEvent<>(event).fire();
         return NO_STEP;
     }

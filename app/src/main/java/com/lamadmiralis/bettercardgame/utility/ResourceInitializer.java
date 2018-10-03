@@ -11,6 +11,7 @@ import java.util.List;
  * @author maczaka
  */
 public class ResourceInitializer {
+
     private static final List<Integer> RESOURCES_TO_LOAD = new ArrayList<>();
 
     static {
@@ -23,6 +24,10 @@ public class ResourceInitializer {
         RESOURCES_TO_LOAD.add(R.drawable.next_turn_button);
         RESOURCES_TO_LOAD.add(R.drawable.full_card_temp);
         RESOURCES_TO_LOAD.add(R.drawable.healthbar);
+    }
+
+    private ResourceInitializer() {
+        //nope.
     }
 
     public static void initResources(final Context context) {
