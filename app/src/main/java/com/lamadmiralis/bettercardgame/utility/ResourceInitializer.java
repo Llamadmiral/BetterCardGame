@@ -21,6 +21,7 @@ public class ResourceInitializer {
         RESOURCES_TO_LOAD.add(R.drawable.reset);
         RESOURCES_TO_LOAD.add(R.drawable.next_turn_button);
         RESOURCES_TO_LOAD.add(R.drawable.full_card_temp);
+        RESOURCES_TO_LOAD.add(R.drawable.healthbar);
     }
 
     public static void initResources(final Context context) {

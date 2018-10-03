@@ -2,9 +2,14 @@ package com.lamadmiralis.bettercardgame.utility;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.util.SparseArray;
+
 import com.lamadmiralis.bettercardgame.objects.card.CardTemplate;
 import com.lamadmiralis.bettercardgame.objects.card.ProjectConstants;
 
@@ -34,9 +39,13 @@ public class ImageHolder {
     }
 
     public static Bitmap resizeBitmap(final Bitmap originalBitmap, final float resizeRatio) {
-        return Bitmap.createScaledBitmap(originalBitmap,
-                (int) (originalBitmap.getWidth() / resizeRatio),
-                (int) (originalBitmap.getHeight() / resizeRatio),
+        return resizeBitMap(originalBitmap, resizeRatio, resizeRatio);
+    }
+
+    public static Bitmap resizeBitMap(final Bitmap original, final float ratioW, final float ratioH) {
+        return Bitmap.createScaledBitmap(original,
+                (int) (original.getWidth() / ratioW),
+                (int) (original.getHeight() / ratioH),
                 false);
     }
 
@@ -58,7 +67,7 @@ public class ImageHolder {
             );
             //canvas.drawBitmap(getResById(card.getFrame()), 0, 0, null);
             //canvas.drawBitmap(getResById(card.getBanner()), 0, 0, null);
-            canvas.drawText(card.getName(), 300 / 2, 40, getFont());
+            canvas.drawText(card.getName(), 300 / 2, 40, getBasicFont());
             CARD_CACHE.put(card.getName() + "#fullSize", resizeBitmap(image, RESIZE_RATIO_FINAL));
         }
     }
@@ -71,7 +80,7 @@ public class ImageHolder {
         return resizeBitmap(RES_CACHE.get(id), ratio);
     }
 
-    public static Paint getFont() {
+    public static Paint getBasicFont() {
         if (!fontInitiated) {
             font.setTypeface(Typeface.DEFAULT_BOLD);
             font.setTextSize(40);

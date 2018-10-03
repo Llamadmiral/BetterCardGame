@@ -2,12 +2,24 @@ package com.lamadmiralis.bettercardgame.utility;
 
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 abstract class AbstractCardHolder {
     protected Map<Integer, AbstractCard> cards = new TreeMap<>();
 
+    /**
+     * Normalizes indexes in hand. E.g.: 1 3 7 -> 1 2 3
+     */
+    static void collapseMap(final Map<Integer, AbstractCard> map, final Set<Integer> indexes) {
+        int i = 0;
+        for (final Integer index : new HashSet<>(indexes)) {
+            map.put(i, map.remove(index));
+            i++;
+        }
+    }
 
     public int getFirstEmptySpace() {
         int index = 0;

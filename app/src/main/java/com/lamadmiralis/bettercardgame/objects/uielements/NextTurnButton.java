@@ -12,9 +12,10 @@ import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 public class NextTurnButton extends AbstractObject {
 
     public NextTurnButton() {
-        this.fullCardImage = ImageHolder.getResByIdAndResize(ProjectConstants.IMG_NEXT_TURN_BUTTON, 3);
-        this.setX(InterfaceContext.WIDTH - this.fullCardImage.getWidth() - 300);
-        this.setY(InterfaceContext.HEIGHT - this.fullCardImage.getHeight() - 100);
+        super();
+        this.fullImage = ImageHolder.getResByIdAndResize(ProjectConstants.IMG_NEXT_TURN_BUTTON, 3);
+        this.setX(InterfaceContext.WIDTH - this.fullImage.getWidth() - 300);
+        this.setY(InterfaceContext.HEIGHT - this.fullImage.getHeight() - 100);
     }
 
     @Override

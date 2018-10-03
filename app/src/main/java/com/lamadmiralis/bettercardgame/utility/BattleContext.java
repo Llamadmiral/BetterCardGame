@@ -64,7 +64,6 @@ public class BattleContext {
         card.setY((isDrawnByPlayer ? InterfaceContext.HEIGHT : -2 * CARD_HEIGHT) + CARD_HEIGHT);
         card.setMovement(new MovementCardDraw(card));
         (isDrawnByPlayer ? player : enemy).drawCard(card);
-        InterfaceContext.getInstance().addToClickable(card);
     }
 
     public int getPositionOfCard(final boolean inHand, final boolean fromPlayer, final AbstractCard card) {

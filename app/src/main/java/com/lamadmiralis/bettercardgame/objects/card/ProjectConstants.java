@@ -30,4 +30,9 @@ public final class ProjectConstants {
     public static int COLOR_DEFAULT_TEXT = R.color.colorDefaultText;
     public static int COLOR_DAMAGED = R.color.colorDamaged;
     public static int COLOR_ABOVE_ORIGINAL = R.color.colorAboveOriginal;
+
+    //Health bar stuff
+    public static int COLOR_HEALTH_BAR_BG = R.color.colorHealtBarBackGround;
+    public static int HEALTH_BAR_WIDTH = 240;
+    public static int HEALT_BAR_HEIGHT = 60;
 }

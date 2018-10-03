@@ -35,7 +35,7 @@ public class AbstractCard extends AbstractObject {
     public AbstractCard(final String name) {
         super();
         this.name = name;
-        this.fullCardImage = ImageHolder.getFullCardImageByName(name);
+        this.fullImage = ImageHolder.getFullCardImageByName(name);
         this.smallImage = ImageHolder.getSmallCardImageByName(name);
     }
 
@@ -64,7 +64,7 @@ public class AbstractCard extends AbstractObject {
                 bitmap = cardBack;
             }
         } else {
-            bitmap = fullCardImage;
+            bitmap = fullImage;
         }
         return bitmap;
     }

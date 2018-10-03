@@ -3,10 +3,7 @@ package com.lamadmiralis.bettercardgame.utility;
 import com.lamadmiralis.bettercardgame.animation.impl.MovementPlayCard;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.lamadmiralis.bettercardgame.objects.uielements.HealthBar;
 
 import static com.lamadmiralis.bettercardgame.utility.BattleContext.BASE_OFFSET;
 import static com.lamadmiralis.bettercardgame.utility.BattleContext.ENEMY_HAND_HEIGHT;
@@ -19,22 +16,18 @@ public class Contestant {
     private Hand hand = new Hand(this);
     private Field field = new Field(this);
     private boolean isPlayer;
+    private int currentHealth;
+    private int maxHealth;
+    private HealthBar healthBar;
 
 
     public Contestant(final boolean isPlayer) {
         this.isPlayer = isPlayer;
+        this.currentHealth = 20;
+        this.maxHealth = 20;
+        init();
     }
 
-    /**
-     * Normalizes indexes in hand. E.g.: 1 3 7 -> 1 2 3
-     */
-    static void collapseMap(final Map<Integer, AbstractCard> map, final Set<Integer> indexes) {
-        int i = 0;
-        for (final Integer index : new HashSet<>(indexes)) {
-            map.put(i, map.remove(index));
-            i++;
-        }
-    }
 
     void finalizeTurn() {
         hand.finalizeTurn();
@@ -56,7 +49,6 @@ public class Contestant {
 
     public float[] getNextPositionForDrawnCard() {
         final int pos = hand.getFirstEmptySpace();
-        //Log.i(Tag.MT, "getNextPositionForDrawnCard: " + pos);
         return getCoordinatesOfNthCardInHand(pos);
     }
 
@@ -94,5 +86,28 @@ public class Contestant {
     public void reset() {
         hand.reset();
         field.reset();
+        this.currentHealth = maxHealth;
+    }
+
+    private void init() {
+        this.healthBar = new HealthBar(this);
+        this.healthBar.setX(300);
+        this.healthBar.setY(this.isPlayer ? 600 : 300);
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(final int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(final int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 }

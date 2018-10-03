@@ -12,9 +12,10 @@ import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 public class DrawablePack extends AbstractObject {
 
     public DrawablePack() {
-        this.fullCardImage = ImageHolder.getResByIdAndResize(ProjectConstants.DEFAULT_CARD_BACK, 3);
-        this.setX(InterfaceContext.WIDTH - this.fullCardImage.getWidth() - 50);
-        this.setY(InterfaceContext.HEIGHT - this.fullCardImage.getHeight() - 50);
+        super();
+        this.fullImage = ImageHolder.getResByIdAndResize(ProjectConstants.DEFAULT_CARD_BACK, 3);
+        this.setX(InterfaceContext.WIDTH - this.fullImage.getWidth() - 50);
+        this.setY(InterfaceContext.HEIGHT - this.fullImage.getHeight() - 50);
     }
 
     @Override

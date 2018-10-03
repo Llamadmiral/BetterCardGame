@@ -6,4 +6,5 @@
     <color name="colorDefaultText">#000000</color>
     <color name="colorDamaged">#ba0707</color>
     <color name="colorAboveOriginal">#37ac00</color>
+    <color name="colorHealtBarBackGround">#64350b</color>
 </resources>

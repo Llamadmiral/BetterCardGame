@@ -2,16 +2,17 @@ package com.lamadmiralis.bettercardgame.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
 import com.lamadmiralis.bettercardgame.animation.Movement;
 import com.lamadmiralis.bettercardgame.renderer.Clickable;
+import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 
 /**
  * @author maczaka
  */
 public abstract class AbstractObject extends Clickable {
-    private static final String TAG = "AbstractObject";
     private static long count = 0;
-    protected Bitmap fullCardImage;
+    protected Bitmap fullImage;
     protected Bitmap smallImage;
     protected int zIndex = 0;
 
@@ -22,11 +23,12 @@ public abstract class AbstractObject extends Clickable {
     protected AbstractObject() {
         id = count;
         count++;
+        InterfaceContext.getInstance().addToClickable(this);
     }
 
     @Override
     public Bitmap getCurrentImage() {
-        return fullCardImage;
+        return fullImage;
     }
 
     public Movement getMovement() {
@@ -64,8 +66,8 @@ public abstract class AbstractObject extends Clickable {
 
     @Override
     public void render(final Canvas canvas) {
-        if (fullCardImage != null) {
-            canvas.drawBitmap(fullCardImage, getX(), getY(), null);
+        if (fullImage != null) {
+            canvas.drawBitmap(fullImage, getX(), getY(), null);
         }
     }
 

@@ -31,7 +31,7 @@ class Field extends AbstractCardHolder {
             removedCards++;
         }
         if (removedCards > 0) {
-            Contestant.collapseMap(this.cards, this.cards.keySet());
+            collapseMap(this.cards, this.cards.keySet());
             removedCards = 0;
         }
     }

@@ -11,7 +11,8 @@ import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 public class Reset extends AbstractObject {
 
     public Reset() {
-        this.fullCardImage = ImageHolder.getResByIdAndResize(ProjectConstants.IMG_RESET, 3);
+        super();
+        this.fullImage = ImageHolder.getResByIdAndResize(ProjectConstants.IMG_RESET, 3);
         this.setX(1100);
         this.setY(100);
     }
