@@ -2,7 +2,6 @@ package com.lamadmiralis.bettercardgame.animation;
 
 import com.lamadmiralis.bettercardgame.renderer.Clickable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

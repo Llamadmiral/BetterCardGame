@@ -5,9 +5,6 @@ import com.lamadmiralis.bettercardgame.animation.impl.MovementCardDraw;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import com.lamadmiralis.bettercardgame.objects.card.impl.TestCard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author maczaka
  */
@@ -82,4 +79,7 @@ public class BattleContext {
         player.reset();
     }
 
+    public Contestant getContestant(final boolean isPlayer) {
+        return isPlayer ? player : enemy;
+    }
 }

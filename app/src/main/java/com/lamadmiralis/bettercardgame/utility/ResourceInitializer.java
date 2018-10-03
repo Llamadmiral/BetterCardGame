@@ -1,6 +1,7 @@
 package com.lamadmiralis.bettercardgame.utility;
 
 import android.content.Context;
+
 import com.lamadmiralis.bettercardgame.R;
 
 import java.util.ArrayList;

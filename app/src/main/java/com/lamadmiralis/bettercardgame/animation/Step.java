@@ -12,7 +12,7 @@ public class Step {
         this.count = count - 1;
     }
 
-    public Step(){
+    public Step() {
 
     }
 

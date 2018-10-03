@@ -7,6 +7,9 @@ import android.util.Log;
 import com.lamadmiralis.bettercardgame.events.AbstractEvent;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.events.impl.EventDrawCard;
+import com.lamadmiralis.bettercardgame.objects.uielements.DrawablePack;
+import com.lamadmiralis.bettercardgame.objects.uielements.NextTurnButton;
+import com.lamadmiralis.bettercardgame.objects.uielements.Reset;
 import com.lamadmiralis.bettercardgame.renderer.Clickable;
 import com.lamadmiralis.bettercardgame.renderer.Renderable;
 
@@ -54,6 +57,9 @@ public class InterfaceContext {
     }
 
     public void test() {
+        new DrawablePack();
+        new Reset();
+        new NextTurnButton();
         InterfaceContext.getInstance().drawCard(3, true);
         InterfaceContext.getInstance().drawCard(3, false);
         EventHandler.dispatch();

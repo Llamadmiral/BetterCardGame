@@ -4,7 +4,6 @@ import com.lamadmiralis.bettercardgame.animation.EventStep;
 import com.lamadmiralis.bettercardgame.animation.Movement;
 import com.lamadmiralis.bettercardgame.animation.Step;
 import com.lamadmiralis.bettercardgame.events.AbstractEvent;
-import com.lamadmiralis.bettercardgame.events.impl.EventAttackOnField;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
 import java.util.ArrayList;

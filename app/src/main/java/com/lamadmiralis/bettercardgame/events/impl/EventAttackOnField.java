@@ -29,7 +29,10 @@ public class EventAttackOnField extends AbstractEvent {
         if (attackedCard != null) {
             attackedCard.subtractFromHealth(attacker.getAttackDamage());
         } else {
-            //TODO: Do enemy player damaging.
+            BattleContext
+                    .getInstance()
+                    .getContestant(!attacker.isOwnedByPlayer())
+                    .addToHealth(-attacker.getAttackDamage());
         }
     }
 }

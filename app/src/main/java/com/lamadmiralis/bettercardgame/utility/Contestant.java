@@ -110,4 +110,9 @@ public class Contestant {
     public void setMaxHealth(final int maxHealth) {
         this.maxHealth = maxHealth;
     }
+
+    public void addToHealth(final int amount) {
+        this.currentHealth += amount;
+        this.healthBar.createImage();
+    }
 }
