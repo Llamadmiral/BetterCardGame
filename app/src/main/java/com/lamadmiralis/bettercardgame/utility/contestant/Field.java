@@ -1,4 +1,4 @@
-package com.lamadmiralis.bettercardgame.utility;
+package com.lamadmiralis.bettercardgame.utility.contestant;
 
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class Field extends AbstractCardHolder {
+public class Field extends AbstractCardHolder {
 
     private final Contestant owner;
     private int removedCards = 0;

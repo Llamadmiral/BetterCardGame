@@ -1,4 +1,4 @@
-package com.lamadmiralis.bettercardgame.utility;
+package com.lamadmiralis.bettercardgame.utility.contestant;
 
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-abstract class AbstractCardHolder {
+public abstract class AbstractCardHolder {
     protected Map<Integer, AbstractCard> cards = new TreeMap<>();
 
     /**

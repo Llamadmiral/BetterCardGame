@@ -1,9 +1,8 @@
 package com.lamadmiralis.bettercardgame.utility;
 
 import com.lamadmiralis.bettercardgame.R;
-import com.lamadmiralis.bettercardgame.animation.impl.MovementCardDraw;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
-import com.lamadmiralis.bettercardgame.objects.card.impl.TestCard;
+import com.lamadmiralis.bettercardgame.utility.contestant.Contestant;
 
 /**
  * @author maczaka
@@ -12,11 +11,11 @@ public class BattleContext {
 
     public static final int CARD_HEIGHT = ImageHolder.getResById(R.drawable.img_placeholder).getHeight();
     public static final int ENEMY_HAND_HEIGHT = 60;
-    static final int SMALL_CARD_WIDTH = ImageHolder.getResizedCardBack().getWidth();
-    static final int SMALL_CARD_HEIGHT = ImageHolder.getResizedCardBack().getHeight();
+    public static final int SMALL_CARD_WIDTH = ImageHolder.getResizedCardBack().getWidth();
+    public static final int SMALL_CARD_HEIGHT = ImageHolder.getResizedCardBack().getHeight();
     public static final float PLAYER_HAND_HEIGHT = InterfaceContext.HEIGHT - (SMALL_CARD_HEIGHT + 50);
-    static final int BASE_OFFSET = 30;
-    static final int PADDING = 15;
+    public static final int BASE_OFFSET = 30;
+    public static final int PADDING = 15;
     private static BattleContext instance = null;
 
     private Contestant player = new Contestant(true);
@@ -54,12 +53,7 @@ public class BattleContext {
     }
 
     public void drawCard(final boolean isDrawnByPlayer) {
-        final AbstractCard card = new TestCard();
-        card.setOwnedByPlayer(isDrawnByPlayer);
-        card.setX(InterfaceContext.WIDTH * (7F / 12F));
-        card.setY((isDrawnByPlayer ? InterfaceContext.HEIGHT : -2 * CARD_HEIGHT) + CARD_HEIGHT);
-        card.setMovement(new MovementCardDraw(card));
-        (isDrawnByPlayer ? player : enemy).drawCard(card);
+        (isDrawnByPlayer ? player : enemy).drawCard();
     }
 
     public int getPositionOfCard(final boolean inHand, final boolean fromPlayer, final AbstractCard card) {

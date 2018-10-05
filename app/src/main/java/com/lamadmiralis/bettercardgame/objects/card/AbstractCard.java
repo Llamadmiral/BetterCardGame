@@ -2,6 +2,7 @@ package com.lamadmiralis.bettercardgame.objects.card;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import com.lamadmiralis.bettercardgame.animation.impl.MovementCardAttack;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
@@ -12,6 +13,7 @@ import com.lamadmiralis.bettercardgame.events.impl.EventMovementEvent;
 import com.lamadmiralis.bettercardgame.objects.AbstractObject;
 import com.lamadmiralis.bettercardgame.utility.BattleContext;
 import com.lamadmiralis.bettercardgame.utility.ImageHolder;
+import com.lamadmiralis.bettercardgame.utility.Tag;
 
 /**
  * @author maczaka

@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.lamadmiralis.bettercardgame.objects.AbstractObject;
 import com.lamadmiralis.bettercardgame.objects.card.ProjectConstants;
-import com.lamadmiralis.bettercardgame.utility.Contestant;
+import com.lamadmiralis.bettercardgame.utility.contestant.Contestant;
 import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
 
 public class HealthBar extends AbstractObject {

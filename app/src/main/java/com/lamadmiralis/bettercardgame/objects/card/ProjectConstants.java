@@ -14,7 +14,15 @@ public final class ProjectConstants {
     public static final int PLACEHOLDER_IMG = R.drawable.img_placeholder;
     public static final int IMG_RESET = R.drawable.reset;
     public static final int IMG_NEXT_TURN_BUTTON = R.drawable.next_turn_button;
-    public static final String TEST_CARD_NAME = "Test Card, the Card";
+
+    //Card names
+    public static final String TESTCARD_NAME_01 = "Shieldbearer";
+    public static final String TESTCARD_NAME_02 = "Footman";
+    public static final String TESTCARD_NAME_03 = "Archer";
+    public static final String TESTCARD_NAME_04 = "Mage";
+    public static final String TESTCARD_NAME_05 = "Knight";
+
+
     //for rendering
     public static final int IMG_CARD_PIC_WIDTH = 365;
     public static final int IMG_CARD_PIC_HEIGHT = 245;

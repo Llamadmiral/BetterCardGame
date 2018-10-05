@@ -1,4 +1,4 @@
-package com.lamadmiralis.bettercardgame.utility;
+package com.lamadmiralis.bettercardgame.utility.contestant;
 
 import com.lamadmiralis.bettercardgame.animation.impl.MovementReArrange;
 import com.lamadmiralis.bettercardgame.events.InstantEvent;

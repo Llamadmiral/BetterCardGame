@@ -2,10 +2,12 @@ package com.lamadmiralis.bettercardgame.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import com.lamadmiralis.bettercardgame.animation.Movement;
 import com.lamadmiralis.bettercardgame.renderer.Clickable;
 import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
+import com.lamadmiralis.bettercardgame.utility.Tag;
 
 /**
  * @author maczaka
@@ -24,6 +26,7 @@ public abstract class AbstractObject extends Clickable {
         id = count;
         count++;
         InterfaceContext.getInstance().addToClickable(this);
+        Log.i(Tag.MT, "Created: " + this.getClass().getSimpleName() + ":" + this.id);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
@@ -31,7 +32,7 @@ public class ImageHolder {
     private static Paint font = new Paint();
     private static boolean fontInitiated = false;
 
-    private ImageHolder(){
+    private ImageHolder() {
         //nope.
     }
 
@@ -134,6 +135,7 @@ public class ImageHolder {
 
     public static Paint getRecolouredNumberText(final int currentValue, final int originalValue) {
         final Paint paint = getNumberText(currentValue);
+        paint.setColor(Color.BLACK);
         if (currentValue > originalValue) {
             paint.setColor(ContextCompat.getColor(InterfaceContext.getInstance().getContext(),
                     ProjectConstants.COLOR_ABOVE_ORIGINAL));

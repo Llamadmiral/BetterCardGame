@@ -14,7 +14,11 @@ public class CardTemplate {
     private static final Map<String, Integer> NAME_MAP = new HashMap<>();
 
     static {
-        NAME_MAP.put(ProjectConstants.TEST_CARD_NAME, ProjectConstants.FULL_CARD_TEMP);
+        NAME_MAP.put(ProjectConstants.TESTCARD_NAME_01, ProjectConstants.FULL_CARD_TEMP);
+        NAME_MAP.put(ProjectConstants.TESTCARD_NAME_02, ProjectConstants.FULL_CARD_TEMP);
+        NAME_MAP.put(ProjectConstants.TESTCARD_NAME_03, ProjectConstants.FULL_CARD_TEMP);
+        NAME_MAP.put(ProjectConstants.TESTCARD_NAME_04, ProjectConstants.FULL_CARD_TEMP);
+        NAME_MAP.put(ProjectConstants.TESTCARD_NAME_05, ProjectConstants.FULL_CARD_TEMP);
     }
 
     private int banner;
