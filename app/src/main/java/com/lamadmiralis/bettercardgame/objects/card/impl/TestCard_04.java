@@ -6,9 +6,11 @@ import com.lamadmiralis.bettercardgame.objects.card.ProjectConstants;
 public class TestCard_04 extends AbstractCard {
     public TestCard_04() {
         super(ProjectConstants.TESTCARD_NAME_04);
-        setInitialAttackDamage(4);
-        setInitialHealthPoints(1);
-        setAttackDamage(4);
-        setHealthPoints(1);
+        setInitialAttackDamage(5);
+        setInitialHealthPoints(3);
+        setAttackDamage(5);
+        setHealthPoints(3);
+        setInitialWaitTime(2);
+        setCurrentWaitTime(2);
     }
 }

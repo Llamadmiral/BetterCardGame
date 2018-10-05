@@ -22,4 +22,7 @@ public abstract class AbstractEvent {
         return offset;
     }
 
+    public void setOffset(final long aOffset) {
+        this.offset = aOffset;
+    }
 }

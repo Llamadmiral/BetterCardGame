@@ -14,33 +14,51 @@ import java.util.List;
  */
 public class EventHandler {
 
-    private static final List<AbstractEvent> EVENTS = new ArrayList<>();
-    private static final List<AbstractEvent> EVENTS_TO_FIRE = new ArrayList<>();
+    private static final Comparator<AbstractEvent> COMPARATOR = new EventComparator();
+    private static final EventHandler instance = new EventHandler();
+
+    private final List<AbstractEvent> events = new ArrayList<>();
+    private final List<AbstractEvent> eventsToFire = new ArrayList<>();
+
+    private long lastFireTS = 0L;
 
     private EventHandler() {
     }
 
-    public static void addEvent(final AbstractEvent event) {
+    public static EventHandler getInstance() {
+        return instance;
+    }
+
+    public void addEvent(final AbstractEvent event) {
         Log.d(Tag.MT, "Event added: " + event.getClass().getSimpleName());
-        EVENTS.add(event);
+        lastFireTS = event.getOffset() > lastFireTS ? event.getOffset() : lastFireTS;
+        events.add(event);
     }
 
-    public static void dispatch() {
-        Log.d(Tag.MT, "Dispatch called, size: " + EVENTS.size());
-        Collections.sort(EVENTS, new EventComparator());
-        EVENTS_TO_FIRE.addAll(EVENTS);
-        EVENTS.clear();
+    public void dispatch() {
+        Log.d(Tag.MT, "Dispatch called, size: " + events.size());
+        Collections.sort(events, COMPARATOR);
+        eventsToFire.addAll(events);
+        events.clear();
     }
 
-    public static List<AbstractEvent> getFireableEvents() {
+    /**
+     * Adds an event to be fired after the latest event with offset.
+     */
+    public void addFinalEvent(final AbstractEvent event, final int offset) {
+        event.setOffset(lastFireTS + offset);
+        events.add(event);
+    }
+
+    public List<AbstractEvent> getFireableEvents() {
         final List<AbstractEvent> events = new ArrayList<>();
-        if (!EVENTS_TO_FIRE.isEmpty()) {
-            for (final AbstractEvent abstractEvent : EVENTS_TO_FIRE) {
+        if (!eventsToFire.isEmpty()) {
+            for (final AbstractEvent abstractEvent : eventsToFire) {
                 if (abstractEvent.isFireable()) {
                     events.add(abstractEvent);
                 }
             }
-            EVENTS_TO_FIRE.removeAll(events);
+            eventsToFire.removeAll(events);
         }
         return events;
     }

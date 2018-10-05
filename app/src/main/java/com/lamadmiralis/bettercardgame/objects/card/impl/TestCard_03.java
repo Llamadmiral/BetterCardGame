@@ -10,5 +10,7 @@ public class TestCard_03 extends AbstractCard {
         setInitialHealthPoints(2);
         setAttackDamage(3);
         setHealthPoints(2);
+        setInitialWaitTime(1);
+        setCurrentWaitTime(1);
     }
 }

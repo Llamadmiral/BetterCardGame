@@ -20,6 +20,6 @@ public class NextTurnButton extends AbstractObject {
 
     @Override
     public void click() {
-        BattleContext.getInstance().nextTurn();
+        BattleContext.getInstance().endTurn();
     }
 }

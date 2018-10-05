@@ -20,6 +20,14 @@ public class Hand extends AbstractCardHolder {
         this.owner = contestant;
     }
 
+    public void initializeTurn() {
+        for (final AbstractCard card : cards.values()) {
+            if (card.getCurrentWaitTime() != 0) {
+                card.setCurrentWaitTime(card.getCurrentWaitTime() - 1);
+            }
+        }
+    }
+
     public void finalizeTurn() {
         if (playedCards > 0) {
             collapseMap(cards, cards.keySet());

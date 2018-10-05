@@ -2,7 +2,6 @@ package com.lamadmiralis.bettercardgame.objects.card;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.Log;
 
 import com.lamadmiralis.bettercardgame.animation.impl.MovementCardAttack;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
@@ -13,7 +12,6 @@ import com.lamadmiralis.bettercardgame.events.impl.EventMovementEvent;
 import com.lamadmiralis.bettercardgame.objects.AbstractObject;
 import com.lamadmiralis.bettercardgame.utility.BattleContext;
 import com.lamadmiralis.bettercardgame.utility.ImageHolder;
-import com.lamadmiralis.bettercardgame.utility.Tag;
 
 /**
  * @author maczaka
@@ -28,6 +26,8 @@ public class AbstractCard extends AbstractObject {
     private Integer initialHealthPoints = 0;
     private Integer attackDamage = 0;
     private Integer healthPoints = 0;
+    private Integer initialWaitTime = 0;
+    private Integer currentWaitTime = 0;
     private boolean canAttack = true;
     private boolean alreadyPlayed = false;
     private float previousX;
@@ -43,9 +43,8 @@ public class AbstractCard extends AbstractObject {
 
     @Override
     public void click() {
-        if (!alreadyPlayed) {
+        if (!alreadyPlayed && currentWaitTime == 0) {
             BattleContext.getInstance().activateCard(this);
-            inHand = !inHand;
         }
     }
 
@@ -86,6 +85,12 @@ public class AbstractCard extends AbstractObject {
                     getY() + (480 / 4.5F),
                     ImageHolder.getRecolouredNumberText(healthPoints, initialHealthPoints)
             );
+        }
+        if (inHand && ownedByPlayer) {
+            canvas.drawText(currentWaitTime.toString(),
+                    getX() + (70 / 4.5F),
+                    getY() + (120 / 4.5F),
+                    ImageHolder.getRecolouredNumberText(initialWaitTime, currentWaitTime));
         }
     }
 
@@ -173,7 +178,7 @@ public class AbstractCard extends AbstractObject {
         if (this.canAttack()) {
             final EventAttackOnField attackOnBattlefield = new EventAttackOnField(480);
             attackOnBattlefield.setAttacker(this);
-            EventHandler.addEvent(new EventMovementEvent(position * 500, this, new MovementCardAttack(this, attackOnBattlefield)));
+            EventHandler.getInstance().addEvent(new EventMovementEvent(position * 500, this, new MovementCardAttack(this, attackOnBattlefield)));
         }
     }
 
@@ -187,5 +192,28 @@ public class AbstractCard extends AbstractObject {
 
     private boolean canAttack() {
         return canAttack;
+    }
+
+    public Integer getInitialWaitTime() {
+        return initialWaitTime;
+    }
+
+    public void setInitialWaitTime(final Integer initialWaitTime) {
+        this.initialWaitTime = initialWaitTime;
+    }
+
+    public Integer getCurrentWaitTime() {
+        return currentWaitTime;
+    }
+
+    public void setCurrentWaitTime(final Integer currentWaitTime) {
+        this.currentWaitTime = currentWaitTime;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractCard{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

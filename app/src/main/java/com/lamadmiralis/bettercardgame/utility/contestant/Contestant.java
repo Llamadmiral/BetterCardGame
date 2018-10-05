@@ -39,7 +39,6 @@ public class Contestant {
     public void finalizeTurn() {
         hand.finalizeTurn();
         field.finalizeTurn();
-        EventHandler.dispatch();
     }
 
     public void activateCard(final AbstractCard card) {
@@ -48,9 +47,11 @@ public class Contestant {
             hand.removeCard(card);
             hand.incPlayedCards();
             field.addCard(card);
+            card.setInHand(false);
         } else {
             field.removeCard(card);
             hand.addCard(card);
+            card.setInHand(true);
         }
     }
 
@@ -139,5 +140,9 @@ public class Contestant {
 
     public Deck getDeck() {
         return deck;
+    }
+
+    public void initializeTurn() {
+        hand.initializeTurn();
     }
 }

@@ -1,5 +1,8 @@
 package com.lamadmiralis.bettercardgame.utility.contestant;
 
+import com.lamadmiralis.bettercardgame.animation.impl.MovementReArrange;
+import com.lamadmiralis.bettercardgame.events.InstantEvent;
+import com.lamadmiralis.bettercardgame.events.impl.EventMovementEvent;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
 import java.util.ArrayList;
@@ -32,6 +35,12 @@ public class Field extends AbstractCardHolder {
         }
         if (removedCards > 0) {
             collapseMap(this.cards, this.cards.keySet());
+            for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
+                final float[] nextPosition = owner.getCoordinatesOfNthCardInField(entry.getKey());
+                new InstantEvent<>(new EventMovementEvent(0,
+                        entry.getValue(),
+                        new MovementReArrange(entry.getValue(), nextPosition))).fire();
+            }
             removedCards = 0;
         }
     }

@@ -7,9 +7,11 @@ public class TestCard_05 extends AbstractCard {
 
     public TestCard_05() {
         super(ProjectConstants.TESTCARD_NAME_05);
-        setInitialAttackDamage(2);
-        setInitialHealthPoints(4);
-        setAttackDamage(2);
-        setHealthPoints(4);
+        setInitialAttackDamage(3);
+        setInitialHealthPoints(5);
+        setAttackDamage(3);
+        setHealthPoints(5);
+        setInitialWaitTime(3);
+        setCurrentWaitTime(3);
     }
 }

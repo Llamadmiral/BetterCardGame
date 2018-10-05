@@ -39,7 +39,7 @@ public class InterfaceContext {
 
     public void drawCard(final int count, final boolean drawForPlayer) {
         for (int i = 0; i < count; i++) {
-            EventHandler.addEvent(new EventDrawCard(1000 + (i * 300), drawForPlayer));
+            EventHandler.getInstance().addEvent(new EventDrawCard(1000 + (i * 300), drawForPlayer));
         }
     }
 
@@ -62,7 +62,7 @@ public class InterfaceContext {
         new NextTurnButton();
         InterfaceContext.getInstance().drawCard(3, true);
         InterfaceContext.getInstance().drawCard(3, false);
-        EventHandler.dispatch();
+        EventHandler.getInstance().dispatch();
     }
 
     public void reset() {
@@ -74,7 +74,7 @@ public class InterfaceContext {
 
     public void update() {
         try {
-            for (final AbstractEvent abstractEvent : EventHandler.getFireableEvents()) {
+            for (final AbstractEvent abstractEvent : EventHandler.getInstance().getFireableEvents()) {
                 abstractEvent.fire();
             }
         } catch (final Exception e) {

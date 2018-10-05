@@ -10,9 +10,6 @@ public class MovementReArrange extends Movement {
 
     private float[] nextPosition;
 
-    /**
-     * @param offsetX number representing a push on the x axis.
-     */
     public MovementReArrange(final Clickable clickable, final float[] nextPosition) {
         this.clickable = clickable;
         this.nextPosition = nextPosition;

@@ -1,8 +1,13 @@
 package com.lamadmiralis.bettercardgame.utility;
 
 import com.lamadmiralis.bettercardgame.R;
+import com.lamadmiralis.bettercardgame.events.EventHandler;
+import com.lamadmiralis.bettercardgame.events.impl.NextTurnEvent;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import com.lamadmiralis.bettercardgame.utility.contestant.Contestant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author maczaka
@@ -21,7 +26,7 @@ public class BattleContext {
     private Contestant player = new Contestant(true);
     private Contestant enemy = new Contestant(false);
 
-    private boolean isPlayersTrun = true;
+    private boolean wasPlayersTurn = false;
 
     public static BattleContext getInstance() {
         if (instance == null) {
@@ -31,17 +36,43 @@ public class BattleContext {
     }
 
     public void nextTurn() {
-        if (isPlayersTrun) {
+        if (wasPlayersTurn) {
+            enemy.initializeTurn();
+            enemyTurn();
+        } else {
+            player.initializeTurn();
+        }
+    }
+
+    public void endTurn() {
+        wasPlayersTurn = !wasPlayersTurn;
+        if (wasPlayersTurn) {
             player.finalizeTurn();
         } else {
             enemy.finalizeTurn();
         }
-        isPlayersTrun = !isPlayersTrun;
+        EventHandler.getInstance().addFinalEvent(new NextTurnEvent(), 250);
+        EventHandler.getInstance().dispatch();
+    }
+
+    private void enemyTurn() {
+        final List<AbstractCard> cardsToActivate = new ArrayList<>();
+        for (final AbstractCard card : enemy.getHand().getCards().values()) {
+            if (card.getCurrentWaitTime() == 0) {
+                cardsToActivate.add(card); //to avoid concurrentModif. exception
+            }
+        }
+        for (final AbstractCard card : cardsToActivate) {
+            enemy.activateCard(card);
+        }
+        endTurn();
     }
 
 
     public void activateCard(final AbstractCard card) {
-        (card.isOwnedByPlayer() ? player : enemy).activateCard(card);
+        if (!card.isOwnedByPlayer() || !wasPlayersTurn) {
+            (card.isOwnedByPlayer() ? player : enemy).activateCard(card);
+        }
     }
 
     public float[] getNextPositionForDrawnCard(final boolean isDrawnByPlayer) {
