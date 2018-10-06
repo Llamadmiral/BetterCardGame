@@ -1,13 +1,13 @@
 package com.lamadmiralis.bettercardgame.utility;
 
+import android.util.Log;
+
 import com.lamadmiralis.bettercardgame.R;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.events.impl.NextTurnEvent;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import com.lamadmiralis.bettercardgame.utility.contestant.Contestant;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lamadmiralis.bettercardgame.utility.contestant.EnemyAI;
 
 /**
  * @author maczaka
@@ -25,8 +25,9 @@ public class BattleContext {
 
     private Contestant player = new Contestant(true);
     private Contestant enemy = new Contestant(false);
+    private EnemyAI enemyAI = new EnemyAI(enemy);
 
-    private boolean wasPlayersTurn = false;
+    private boolean isPlayerTurn = true;
 
     public static BattleContext getInstance() {
         if (instance == null) {
@@ -36,42 +37,28 @@ public class BattleContext {
     }
 
     public void nextTurn() {
-        if (wasPlayersTurn) {
-            enemy.initializeTurn();
-            enemyTurn();
+        if (isPlayerTurn) {
+            enemyAI.startTurn();
         } else {
             player.initializeTurn();
         }
+        isPlayerTurn = !isPlayerTurn;
     }
 
     public void endTurn() {
-        wasPlayersTurn = !wasPlayersTurn;
-        if (wasPlayersTurn) {
+        if (isPlayerTurn) {
             player.finalizeTurn();
-        } else {
-            enemy.finalizeTurn();
+            EventHandler.getInstance().addFinalEvent(new NextTurnEvent());
+            EventHandler.getInstance().dispatch();
         }
-        EventHandler.getInstance().addFinalEvent(new NextTurnEvent(), 250);
-        EventHandler.getInstance().dispatch();
-    }
-
-    private void enemyTurn() {
-        final List<AbstractCard> cardsToActivate = new ArrayList<>();
-        for (final AbstractCard card : enemy.getHand().getCards().values()) {
-            if (card.getCurrentWaitTime() == 0) {
-                cardsToActivate.add(card); //to avoid concurrentModif. exception
-            }
-        }
-        for (final AbstractCard card : cardsToActivate) {
-            enemy.activateCard(card);
-        }
-        endTurn();
     }
 
 
     public void activateCard(final AbstractCard card) {
-        if (!card.isOwnedByPlayer() || !wasPlayersTurn) {
+        if (!card.isOwnedByPlayer() || isPlayerTurn) {
             (card.isOwnedByPlayer() ? player : enemy).activateCard(card);
+        } else {
+            Log.i(Tag.MT, "Can't activate card");
         }
     }
 
@@ -105,5 +92,13 @@ public class BattleContext {
 
     public Contestant getContestant(final boolean isPlayer) {
         return isPlayer ? player : enemy;
+    }
+
+    public Contestant getEnemy() {
+        return enemy;
+    }
+
+    public EnemyAI getEnemyAI() {
+        return this.enemyAI;
     }
 }

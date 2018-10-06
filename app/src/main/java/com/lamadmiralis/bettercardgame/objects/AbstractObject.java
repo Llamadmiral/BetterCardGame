@@ -26,7 +26,7 @@ public abstract class AbstractObject extends Clickable {
         id = count;
         count++;
         InterfaceContext.getInstance().addToClickable(this);
-        Log.i(Tag.MT, "Created: " + this.getClass().getSimpleName() + ":" + this.id);
+        Log.d(Tag.MT, "Created: " + this.getClass().getSimpleName() + ":" + this.id);
     }
 
     @Override

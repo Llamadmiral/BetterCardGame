@@ -5,7 +5,7 @@ import com.lamadmiralis.bettercardgame.utility.BattleContext;
 
 public class NextTurnEvent extends AbstractEvent {
     public NextTurnEvent() {
-        super(0L); //always used as a finalizing Event.
+        super(500L); //always used as a finalizing Event.
     }
 
     @Override

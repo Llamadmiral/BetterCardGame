@@ -45,8 +45,8 @@ public class EventHandler {
     /**
      * Adds an event to be fired after the latest event with offset.
      */
-    public void addFinalEvent(final AbstractEvent event, final int offset) {
-        event.setOffset(lastFireTS + offset);
+    public void addFinalEvent(final AbstractEvent event) {
+        event.setOffset(lastFireTS + event.getOffset());
         events.add(event);
     }
 
