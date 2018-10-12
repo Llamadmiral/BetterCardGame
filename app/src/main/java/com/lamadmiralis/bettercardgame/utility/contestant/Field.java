@@ -34,13 +34,7 @@ public class Field extends AbstractCardHolder {
             removedCards++;
         }
         if (removedCards > 0) {
-            collapseMap(this.cards, this.cards.keySet());
-            for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
-                final float[] nextPosition = owner.getCoordinatesOfNthCardInField(entry.getKey());
-                new InstantEvent<>(new EventMovementEvent(0,
-                        entry.getValue(),
-                        new MovementReArrange(entry.getValue(), nextPosition))).fire();
-            }
+            rearrangeCards();
             removedCards = 0;
         }
     }
@@ -65,5 +59,15 @@ public class Field extends AbstractCardHolder {
     public void reset() {
         this.cards.clear();
         removedCards = 0;
+    }
+
+    public void rearrangeCards() {
+        collapseMap(this.cards);
+        for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
+            final float[] nextPosition = owner.getCoordinatesOfNthCardInField(entry.getKey());
+            new InstantEvent<>(new EventMovementEvent(0,
+                    entry.getValue(),
+                    new MovementReArrange(entry.getValue(), nextPosition))).fire();
+        }
     }
 }

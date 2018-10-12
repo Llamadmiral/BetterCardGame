@@ -8,12 +8,12 @@ import com.lamadmiralis.bettercardgame.utility.Tag;
 
 public class EventAIStartAttackPhase extends AbstractEvent {
     public EventAIStartAttackPhase() {
-        super(300L);
+        super(0L);
     }
 
     @Override
     public void fire() {
         Log.i(Tag.MT, "Started attack phase for AI");
-        BattleContext.getInstance().getEnemyAI().attackWithCards();
+        BattleContext.getInstance().getEnemyAI().startAttackPhase();
     }
 }

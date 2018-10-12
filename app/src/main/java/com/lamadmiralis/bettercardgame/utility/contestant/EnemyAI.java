@@ -17,13 +17,20 @@ public class EnemyAI {
     }
 
     public void startTurn() {
+        enemy.drawCard();
         enemy.getHand().initializeTurn();
         playCards();
+        initiateAttackPhase();
         Log.i(Tag.MT, "Started Enemy Turn");
     }
 
+    private void initiateAttackPhase() {
+        EventHandler.getInstance().addFinalEvent(new EventAIStartAttackPhase());
+        EventHandler.getInstance().dispatch();
+    }
 
-    public void attackWithCards() {
+
+    public void startAttackPhase() {
         enemy.finalizeTurn();
         EventHandler.getInstance().addFinalEvent(new NextTurnEvent());
         EventHandler.getInstance().dispatch();
@@ -37,8 +44,6 @@ public class EnemyAI {
                 EventHandler.getInstance().addEvent(new EventPlayEnemyCard(200 * i, card));
             }
         }
-        EventHandler.getInstance().addFinalEvent(new EventAIStartAttackPhase());
-        EventHandler.getInstance().dispatch();
     }
 
 }

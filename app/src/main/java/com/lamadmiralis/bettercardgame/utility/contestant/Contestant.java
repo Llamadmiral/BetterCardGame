@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.lamadmiralis.bettercardgame.animation.impl.MovementCardDraw;
 import com.lamadmiralis.bettercardgame.animation.impl.MovementPlayCard;
-import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import com.lamadmiralis.bettercardgame.objects.uielements.HealthBar;
 import com.lamadmiralis.bettercardgame.utility.BattleContext;
@@ -35,6 +34,11 @@ public class Contestant {
         init();
     }
 
+
+    public void initializeTurn() {
+        drawCard();
+        hand.initializeTurn();
+    }
 
     public void finalizeTurn() {
         hand.finalizeTurn();
@@ -142,7 +146,4 @@ public class Contestant {
         return deck;
     }
 
-    public void initializeTurn() {
-        hand.initializeTurn();
-    }
 }

@@ -176,7 +176,7 @@ public class AbstractCard extends AbstractObject {
 
     public void attack(final int position) {
         if (this.canAttack()) {
-            final EventAttackOnField attackOnBattlefield = new EventAttackOnField(480);
+            final EventAttackOnField attackOnBattlefield = new EventAttackOnField(0);
             attackOnBattlefield.setAttacker(this);
             EventHandler.getInstance().addEvent(new EventMovementEvent(position * 500, this, new MovementCardAttack(this, attackOnBattlefield)));
         }
