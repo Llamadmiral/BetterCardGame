@@ -116,6 +116,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         for (final Renderable renderable : new ArrayList<>(objectsToDraw)) {
             renderable.render(canvas);
         }
+        InterfaceContext.getInstance().removeObjects();
     }
 
 }

@@ -2,6 +2,8 @@ package com.lamadmiralis.bettercardgame.renderer;
 
 import android.graphics.Bitmap;
 
+import com.lamadmiralis.bettercardgame.utility.InterfaceContext;
+
 /**
  * @author maczaka
  */
@@ -21,6 +23,10 @@ public abstract class Clickable implements Renderable {
             isClicked = true;
         }
         return isClicked;
+    }
+
+    public void removeObject() {
+        InterfaceContext.getInstance().removeObject(this);
     }
 
     public boolean isInAnimation() {
@@ -62,4 +68,5 @@ public abstract class Clickable implements Renderable {
     public String getPrintablePosition() {
         return "x: " + getX() + ", y: " + getY();
     }
+
 }

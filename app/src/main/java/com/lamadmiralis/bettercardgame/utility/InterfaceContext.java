@@ -7,7 +7,6 @@ import android.util.Log;
 import com.lamadmiralis.bettercardgame.events.AbstractEvent;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.events.impl.EventDrawCard;
-import com.lamadmiralis.bettercardgame.objects.uielements.DrawablePack;
 import com.lamadmiralis.bettercardgame.objects.uielements.NextTurnButton;
 import com.lamadmiralis.bettercardgame.objects.uielements.Reset;
 import com.lamadmiralis.bettercardgame.renderer.Clickable;
@@ -28,6 +27,7 @@ public class InterfaceContext {
 
     private List<Renderable> objectsToDraw = new ArrayList<>();
     private List<Clickable> clickables = new ArrayList<>();
+    private List<Clickable> objectsToRemove = new ArrayList<>();
 
     public static InterfaceContext getInstance() {
         if (instance == null) {
@@ -56,8 +56,18 @@ public class InterfaceContext {
         clickables.add(clickable);
     }
 
+    public void removeObject(final Clickable clickable) {
+        objectsToRemove.add(clickable);
+    }
+
+    public void removeObjects() {
+        if (!objectsToRemove.isEmpty()) {
+            objectsToDraw.removeAll(objectsToRemove);
+            clickables.removeAll(objectsToRemove);
+        }
+    }
+
     public void test() {
-        new DrawablePack();
         new Reset();
         new NextTurnButton();
         InterfaceContext.getInstance().drawCard(3, true);

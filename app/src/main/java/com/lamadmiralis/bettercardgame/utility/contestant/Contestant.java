@@ -115,8 +115,8 @@ public class Contestant {
 
     private void init() {
         this.healthBar = new HealthBar(this);
-        this.healthBar.setX(300);
-        this.healthBar.setY(this.isPlayer ? 600 : 300);
+        this.healthBar.setX(800);
+        this.healthBar.setY(this.isPlayer ? 600 : 150);
         this.deck = new Deck();
         this.deck.test();
     }

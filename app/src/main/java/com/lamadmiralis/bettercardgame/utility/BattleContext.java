@@ -5,6 +5,7 @@ import android.util.Log;
 import com.lamadmiralis.bettercardgame.R;
 import com.lamadmiralis.bettercardgame.events.EventHandler;
 import com.lamadmiralis.bettercardgame.events.impl.NextTurnEvent;
+import com.lamadmiralis.bettercardgame.objects.TimedText;
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 import com.lamadmiralis.bettercardgame.utility.contestant.Contestant;
 import com.lamadmiralis.bettercardgame.utility.contestant.EnemyAI;
@@ -38,8 +39,10 @@ public class BattleContext {
 
     public void nextTurn() {
         if (isPlayerTurn) {
+            new TimedText("ENEMY'S TURN!", 2);
             enemyAI.startTurn();
         } else {
+            new TimedText("YOUR TURN!", 2);
             player.initializeTurn();
         }
         isPlayerTurn = !isPlayerTurn;
