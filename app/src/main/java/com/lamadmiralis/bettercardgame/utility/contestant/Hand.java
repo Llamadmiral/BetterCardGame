@@ -30,7 +30,7 @@ public class Hand extends AbstractCardHolder {
 
     public void finalizeTurn() {
         if (playedCards > 0) {
-            collapseMap(cards);
+            collapseCards();
             for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
                 final float[] nextPosition = owner.getCoordinatesOfNthCardInHand(entry.getKey());
                 new InstantEvent<>(new EventMovementEvent(0, entry.getValue(), new MovementReArrange(entry.getValue(), nextPosition))).fire();

@@ -62,7 +62,7 @@ public class Field extends AbstractCardHolder {
     }
 
     public void rearrangeCards() {
-        collapseMap(this.cards);
+        collapseCards();
         for (final Map.Entry<Integer, AbstractCard> entry : cards.entrySet()) {
             final float[] nextPosition = owner.getCoordinatesOfNthCardInField(entry.getKey());
             new InstantEvent<>(new EventMovementEvent(0,

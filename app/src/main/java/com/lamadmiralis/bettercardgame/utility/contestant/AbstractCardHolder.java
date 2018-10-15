@@ -2,7 +2,6 @@ package com.lamadmiralis.bettercardgame.utility.contestant;
 
 import com.lamadmiralis.bettercardgame.objects.card.AbstractCard;
 
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,12 +12,14 @@ public abstract class AbstractCardHolder {
      * Normalizes indexes in a map. E.g.: 1 3 7 -> 1 2 3.
      * Use TreeMap, or order will be lost.
      */
-    static void collapseMap(final Map<Integer, AbstractCard> map) {
+    void collapseCards() {
+        final Map<Integer, AbstractCard> newOrder = new LinkedHashMap<>();
         int i = 0;
-        for (final Integer index : new HashSet<>(map.keySet())) {
-            map.put(i, map.remove(index));
+        for (final Map.Entry<Integer, AbstractCard> card : cards.entrySet()) {
+            newOrder.put(i, card.getValue());
             i++;
         }
+        cards = newOrder;
     }
 
     public int getFirstEmptySpace() {
