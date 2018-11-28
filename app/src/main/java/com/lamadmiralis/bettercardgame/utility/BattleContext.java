@@ -39,10 +39,14 @@ public class BattleContext {
 
     public void nextTurn() {
         if (isPlayerTurn) {
-            new TimedText("ENEMY'S TURN!", 2);
+            final TimedText timedText = new TimedText("ENEMY'S TURN!", 2);
+            timedText.setX((InterfaceContext.WIDTH / 2) - (timedText.getText().length() / 2));
+            timedText.setY(InterfaceContext.HEIGHT / 2);
             enemyAI.startTurn();
         } else {
-            new TimedText("YOUR TURN!", 2);
+            final TimedText timedText = new TimedText("YOUR TURN!", 2);
+            timedText.setX((InterfaceContext.WIDTH / 2) - (timedText.getText().length() / 2));
+            timedText.setY(InterfaceContext.HEIGHT / 2);
             player.initializeTurn();
         }
         isPlayerTurn = !isPlayerTurn;
